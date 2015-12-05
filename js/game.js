@@ -1,27 +1,35 @@
-var game = new Phaser.Game( 800, 600, Phaser.AUTO, '', 
+var game = new Phaser.Game( 800, 600, Phaser.AUTO, '',
     {
-        preload: preload, 
-        create: create, 
-        update: update 
+        preload: preload,
+        create: create,
+        update: update
     });
 
 var player,
     baddies,
     stars,
-    diamonds,   
+    diamonds,
     healthKits,
     platforms, // create platforms var for use in create()
     cursors,
     score = 0,
     scoreText,
     healthPoints = 100,
-    healthPointsText;
+    healthPointsText,
+    killCount = 0,
+    killCountText,
+    bullets,
+    bullet,
+    bulletImg,
+    bulletTime = 0,
+    instance;
 
 function preload() {
 
     // terrain
     game.load.image('background', 'assets/background.png');
     game.load.image('ground', 'assets/platform.png');
+    game.load.image('ledge', 'assets/ledge.png');
     // powerups
     game.load.image('star', 'assets/star.png');
     game.load.image('diamond', 'assets/diamond.png');
@@ -29,6 +37,7 @@ function preload() {
     // characters
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
     game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
+    game.load.spritesheet('bullet', 'assets/bullet.png', 14, 8);
 
 }
 
@@ -38,21 +47,38 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // sprites
-    game.add.sprite(0, 0, 'background'); // background
+    instance = game.add.sprite(0, 0, 'background'); // background
 
     // platforms, parent of ground & ledges.
     platforms = game.add.group(); // groups ledges & ground.
     platforms.enableBody = true; // enables physics for group bodies.
 
+    //bullets
+    bullets = game.add.group();
+    bullets.enableBody = true;
+    bullets.physicsBodyType = Phaser.Physics.ARCADE;
+    for (var i = 0; i < 20; i++)
+    {
+        var b = bullets.create(14, 8, 'bullet');
+        b.name = 'bullet' + i;
+        b.exists = false;
+        b.visible = false;
+        b.checkWorldBounds = true;
+        b.events.onOutOfBounds.add(killBullet, this);
+    }
     // ground
     var ground = platforms.create(0, game.world.height - 64, 'ground'); // add ground.
     ground.scale.setTo(2,2); // scales to fit, original file is 400x32 pixels.
     ground.body.immovable = true; // doesn't fall away when touched as default.
 
     // ledges
-    var ledge = platforms.create(400, 400, 'ground'); // 'ground' loads the asset.
+    var ledge = platforms.create(300, 400, 'ledge'); // 'ground' loads the asset.
     ledge.body.immovable = true;
-    ledge = platforms.create(-150, 275, 'ground');
+    ledge = platforms.create(0, 325, 'ledge');
+    ledge.body.immovable = true;
+    ledge = platforms.create(715, 315, 'ledge');
+    ledge.body.immovable = true;
+    ledge = platforms.create(500, 250, 'ledge');
     ledge.body.immovable = true;
 
     // player one ready!
@@ -91,13 +117,19 @@ function create() {
 
     // create HP
     healthPointsText = game.add.text(16,16, 'HP: 100', {
-        fontSize: '32px',
+        fontSize: '24px',
         fill: '#FFF'
     });
 
     // create ScoreText
-    scoreText = game.add.text(16,46, 'Score: 0', {
-        fontSize: '32px',
+    scoreText = game.add.text(16,42, 'Score: 0', {
+        fontSize: '24px',
+        fill: '#FFF'
+    });
+
+    // create KilLCount
+    killCountText = game.add.text(16,68, 'Kills: 0', {
+        fontSize: '24px',
         fill: '#FFF'
     });
 }
@@ -116,6 +148,8 @@ function update() {
     game.physics.arcade.overlap(player, diamonds, collectDiamond, null, this);
     game.physics.arcade.overlap(player, healthKits, collectHealthPoints, null, this);
     game.physics.arcade.overlap(player, baddies, damagePlayer, null, this);
+    game.physics.arcade.overlap(bullets, baddies, killBaddie, null, this);
+    game.physics.arcade.overlap(bullets, platforms, killBullet, null, this);
 
     // manage player movement
     player.body.velocity.x = 0; //reset velocity
@@ -136,6 +170,13 @@ function update() {
         player.frame = 4;
     }
 
+    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
+    {
+        fireBullet();
+    }
+
+
+
     baddies.forEach(moveEntity, this, true);
 
     // vertical movement,
@@ -145,6 +186,51 @@ function update() {
         player.body.velocity.y = -350;
     }
 
+}
+
+function fireBullet () {
+
+    if (game.time.now > bulletTime)
+    {
+        bullet = bullets.getFirstExists(false);
+
+        if (bullet)
+        {
+            bullet.reset(player.x, player.y + 24);
+            if (cursors.left.isDown) { // move left, play left
+                bullet.body.velocity.x = -300;
+                bullet.rotation = 0;
+                bulletTime = game.time.now + 150;
+                var flyLeft = bullet.animations.add('flyLeft', [7,6,5,4]);
+                flyLeft.play(10, true);
+
+            } else if (cursors.right.isDown) { // move right, play right
+                bullet.body.velocity.x = +300;
+                bullet.rotation = 0;
+                bulletTime = game.time.now + 150;
+                var flyRight = bullet.animations.add('flyRight', [0,1,2,3]);
+                flyRight.play(10, true);
+
+
+            } else { // shoot up
+                bullet.body.velocity.y = -300;
+                bullet.rotation = -1.6;
+                bulletTime = game.time.now + 150;
+                var flyUp = bullet.animations.add('flyUp', [0,1,2,3]);
+                flyUp.play(10, true);
+            }
+        }
+    }
+
+}
+
+function killBaddie (bullet, baddie) {
+
+    killCount += 1;
+    killCountText.text = "Kills: " + killCount;
+
+    bullet.kill();
+    baddie.kill();
 }
 
 function deployEntities(amount, type) {
@@ -159,7 +245,7 @@ function deployEntities(amount, type) {
     for (var i = 0; i < amount; i++) {
 
         var locX = Math.floor(Math.random() * (770 - 0) + 0);
-        var locY = Math.floor(Math.random() * (568 - 300) + 0);
+        var locY = Math.floor(Math.random() * (400 - 0) + 0);
 
         if ( i === diamondX ) { // TODO: deploy diamond
             var diamond = diamonds.create(locX, locY, 'diamond');
@@ -174,10 +260,10 @@ function deployEntities(amount, type) {
         } else if ( type === "baddie" ) {
             var baddie = baddies.create(locX, locY, 'baddie');
             baddie.body.gravity.y = 200;
-            baddie.movementDirection = "L";
-            // baddie animation
-            var anim = baddie.animations.add('pounce', [1,0]);
-            anim.play(10, true);
+            baddie.move = "left_pounce";
+            var left_pounce = baddie.animations.add('left_pounce', [1,0]); // create left pounce
+            left_pounce.play(10, true);
+            moveEntity(baddie);
         } else {
             var star = stars.create(locX, locY, 'star');
             star.body.gravity.y = 9;
@@ -189,21 +275,45 @@ function deployEntities(amount, type) {
 }
 
 function moveEntity(entity) {
-    if (entity.movementDirection == "L") {
-        entity.x -= 2;
-        if (entity.x <= 0) {
+    // creates object of all movements.
+    var movements = {
+        "left_pounce": function(){ // 
+            if (entity.x > 0) {
+                entity.x -= 2;
+                return entity;
+
+            }
+
             entity.x = 0;
-            entity.movementDirection = "R";
-        }
-    } else {
-        entity.x += 2;
-        if (entity.x >= 768) {
+            entity.move = "right_pounce";
+            // baddie animation
+            entity.animations.stop(null, true); // stop all animation
+            var right_pounce = entity.animations.add('right_pounce', [2,3]);
+            right_pounce.play(10, true);
+
+        },
+        "right_pounce": function (){
+            if (entity.x < 768) {
+                entity.x += 2;
+                return entity;
+            }
+
             entity.x = 768;
-            entity.movementDirection = "L";
+            entity.move = "left_pounce";
+
+            // baddie animation
+            entity.animations.stop(null, true); // stop all animations
+            var left_pounce = entity.animations.add('left_pounce', [1,0]); // create left pounce
+            left_pounce.play(10, true);
         }
     }
-}
 
+    if (entity.move in movements) {
+        return movements[entity.move]();
+    }
+
+    console.log("entity", entity);
+}
 
 function collectStar(player, star) {
     // removes star from screen
@@ -236,7 +346,9 @@ function collectDiamond(player, diamond) {
     score+= 50;
     scoreText.text = 'Score: ' + score;
 
-    deployEntities(1, "baddie");
+    killCount == 0 ? baddiesToDeploy = 1 : baddiesToDeploy = killCount + 1;
+
+    deployEntities(baddiesToDeploy, "baddie");
 }
 
 function damagePlayer() {
@@ -252,9 +364,11 @@ function damagePlayer() {
 
 function killPlayer() {
     player.kill();
-    // TODO: enable restart
 }
 
-function restartGame() {
-    
-} 
+//  Called if the bullet goes out of the screen
+function killBullet (bullet) {
+
+    bullet.kill();
+
+}
