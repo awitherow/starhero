@@ -15,4 +15,4 @@ The executable game is now located in www/. Just link your web server to it, or 
 
 ## Goals
 
-1. enabled gps/weather based backgrounds [openweather current](http://openweathermap.org/current) [html5 geo](http://www.w3schools.com/html/html5_geolocation.asp)
+1. enabled gps/weather based backgrounds [openweather current](http://openweathermap.org/current), [html5 geo](http://www.w3schools.com/html/html5_geolocation.asp).
