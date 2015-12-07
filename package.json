@@ -1,0 +1,20 @@
+{
+  "name": "starhero",
+  "version": "0.1.0",
+  "description": "collect stars, diamonds, heal yourself, kill baddies. how long can you survive?",
+  "main": "www/js/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD",
+  "devDependencies": {
+    "bower": "~1.6.8",
+    "gulp": "~3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "~4.3.5"
+  }
+}
