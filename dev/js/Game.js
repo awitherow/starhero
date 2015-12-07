@@ -3,9 +3,10 @@ define(
     [
         "phaser",
         "Player",
+        "Environment",
         "ItemsGroup"
     ],
-    function(Phaser, Player, ItemsGroup) {
+    function(Phaser, Player, Environment, ItemsGroup) {
 
         var PlayState = function() {
             return {
@@ -32,10 +33,15 @@ define(
 
                     this._player = new Player(this.game);
                     this._items = new ItemsGroup(this.game);
+                    this._environment = new Environment(this.game);
+                    this._environment.setEnvironment();
                     this._items.start();
 
                 },
                 update: function () {
+                    // set collisions
+                    this.game.physics.arcade.collide(this._player, this._environment);
+                    this.game.physics.arcade.collide(this._items, this._environment);
                 }
             };
         };

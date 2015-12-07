@@ -2,7 +2,8 @@
 require.config({
     "baseUrl": "js",
     "paths": {
-        phaser: "libs/phaser-official/build/phaser"
+        phaser: "libs/phaser-official/build/phaser",
+        underscore: "libs/underscore/underscore"
     },
     "shim": {
         "phaser": {

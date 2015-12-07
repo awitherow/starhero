@@ -12,7 +12,7 @@ define(
             // player physics & properties
             game.physics.arcade.enable(this);
             this.body.bounce.y = 0.1;
-            this.body.gravity.y = 400;
+            this.body.gravity.y = 1000;
             this.body.collideWorldBounds = true; // if off screen, collide against boundaries
 
             // player animations
@@ -52,7 +52,7 @@ define(
             }
 
             // jump
-            if ( this.game.input.keyboard.isDown(Phaser.Keyboard.UP) && this.body.touching.down ){
+            if ( this.game.input.keyboard.isDown(Phaser.Keyboard.UP) ){
                 this.body.velocity.y = -350;
             }
         }
