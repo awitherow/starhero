@@ -10,20 +10,17 @@ define(
         var ItemsGroup = function(game) {
             Phaser.Group.call(this, game);
 
-            this.game.physics.arcade.enable(this, true);
-
-            this.start();
+            game.physics.arcade.enable(this, true);
 
             game.add.existing(this);
-            
+
         };
 
-        ItemsGroup.prototype = Object.create(Phaser.Sprite.prototype);
+        ItemsGroup.prototype = Object.create(Phaser.Group.prototype);
         ItemsGroup.prototype.constructor = ItemsGroup;
 
         ItemsGroup.prototype.start = function () {
             this.spawnItems(12);
-
         };
 
         ItemsGroup.prototype.update = function() {
@@ -31,14 +28,18 @@ define(
         };
 
         ItemsGroup.prototype.spawnItems = function (amount, type) {
+
             for ( var i = 0; i < amount; i++ ) {
-                var item = new Item(this.game, type);
+                var locX = Math.floor(Math.random() * this.game.world.bounds.width);
+                var locY = Math.floor(Math.random() * this.game.world.bounds.width / 2);
+
+                var item = new Item(this.game, locX, locY, type);
                 this.add(item);
             }
 
         };
 
-       return ItemsGroup;
+        return ItemsGroup;
 
     }
 );

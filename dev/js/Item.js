@@ -6,28 +6,27 @@ define(
     ],
     function(Phaser) {
 
-        var Item = function(game) {
-            Phaser.Group.call(this, game);
+        var Item = function(game, x, y) {
 
-            this.game.physics.arcade.enable(this, true);
+            Phaser.Sprite.call(this, game, x, y, "star");
 
-            this.start();
+            game.physics.arcade.enable(this, true);
+
+            this.body.gravity.y = (0.7 + Math.random()) * 15;
+            this.body.bounce.y = 0.7 + Math.random() * 0.2;
 
             game.add.existing(this);
-            
+
         };
 
         Item.prototype = Object.create(Phaser.Sprite.prototype);
         Item.prototype.constructor = Item;
 
-        Item.prototype.start = function () {
-        };
-
         Item.prototype.update = function() {
 
         };
 
-       return Item;
+        return Item;
 
     }
 );

@@ -1,9 +1,11 @@
 define(
     "Game",
     [
-        "phaser"
+        "phaser",
+        "Player",
+        "ItemsGroup"
     ],
-    function(Phaser) {
+    function(Phaser, Player, ItemsGroup) {
 
         var PlayState = function() {
             return {
@@ -26,7 +28,7 @@ define(
                     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
                     // sprites
-                    this._background = game.add.sprite(0, 0, 'background'); // background
+                    this._background = this.game.add.sprite(0, 0, 'background'); // background
 
                     this._player = new Player(this.game);
                     this._items = new ItemsGroup(this.game);
