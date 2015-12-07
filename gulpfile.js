@@ -4,7 +4,7 @@ var gulp = require("gulp"),
 	babel = require("gulp-babel");
 
 var paths = {
-	es6: ['dev/es6/**/*.js'],
+	es6: ['dev/js/**/*.js'],
 	dev: ['dev/**/*']
 }
 
