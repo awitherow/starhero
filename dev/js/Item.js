@@ -15,6 +15,8 @@ define(
             this.body.gravity.y = (0.7 + Math.random()) * 15;
             this.body.bounce.y = 0.7 + Math.random() * 0.2;
 
+            this.body.collideWorldBounds = true; // if off screen, collide against boundaries
+            
             game.add.existing(this);
 
         };
