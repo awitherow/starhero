@@ -175,8 +175,6 @@ function update() {
         fireBullet();
     }
 
-
-
     baddies.forEach(moveEntity, this, true);
 
     // vertical movement,
