@@ -12,8 +12,6 @@ define(
 
             game.physics.arcade.enable(this, true);
 
-            this.enableBody = true;
-
             game.add.existing(this);
 
         };
