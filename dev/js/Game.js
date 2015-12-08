@@ -54,7 +54,7 @@ define(
                 "", //parent(htmlelement)
                 null, //state
                 false, //transparent
-                false, //antialias
+                true, //antialias
                 Phaser.Physics.ARCADE //physics
             );
             this.state.add("play", PlayState);
