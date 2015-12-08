@@ -20,8 +20,10 @@ var player,
     killCountText,
     bullets,
     bullet,
-    bulletImg,
     bulletTime = 0,
+    hanky,
+    hankies,
+    hankyTime = 0,
     instance;
 
 function preload() {
@@ -38,6 +40,7 @@ function preload() {
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
     game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
     game.load.spritesheet('bullet', 'assets/bullet.png', 14, 8);
+    game.load.spritesheet('hanky', 'assets/hankies_rotate.png', 24, 24);
 
 }
 
@@ -66,6 +69,21 @@ function create() {
         b.checkWorldBounds = true;
         b.events.onOutOfBounds.add(killBullet, this);
     }
+
+    //hanky shit bombs
+    hankies = game.add.group();
+    hankies.enableBody = true;
+    hankies.physicsBodyType = Phaser.Physics.ARCADE;
+    for (var j = 0; j < 100; j++)
+    {
+        var h = hankies.create(24, 24, 'hanky');
+        h.name = 'hanky' + j;
+        h.exists = false;
+        h.visible = false;
+        h.checkWorldBounds = true;
+        h.events.onOutOfBounds.add(killHanky, this);
+    }
+
     // ground
     var ground = platforms.create(0, game.world.height - 64, 'ground'); // add ground.
     ground.scale.setTo(2,2); // scales to fit, original file is 400x32 pixels.
@@ -142,6 +160,7 @@ function update() {
     game.physics.arcade.collide(diamonds, platforms);
     game.physics.arcade.collide(healthKits, platforms);
     game.physics.arcade.collide(baddies, platforms);
+    game.physics.arcade.collide(hankies, platforms);
 
     // check for overlap with player
     game.physics.arcade.overlap(player, stars, collectStar, null, this);
@@ -149,7 +168,9 @@ function update() {
     game.physics.arcade.overlap(player, healthKits, collectHealthPoints, null, this);
     game.physics.arcade.overlap(player, baddies, damagePlayer, null, this);
     game.physics.arcade.overlap(bullets, baddies, killBaddie, null, this);
+    game.physics.arcade.overlap(hankies, baddies, killBaddie, null, this);
     game.physics.arcade.overlap(bullets, platforms, killBullet, null, this);
+    //game.physics.arcade.overlap(hankies, platforms, killHanky, null, this);
 
     // manage player movement
     player.body.velocity.x = 0; //reset velocity
@@ -173,6 +194,10 @@ function update() {
     if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
     {
         fireBullet();
+    }
+    if (game.input.keyboard.isDown(Phaser.Keyboard.CONTROL))
+    {
+        dumpHanky();
     }
 
 
@@ -219,6 +244,25 @@ function fireBullet () {
                 var flyUp = bullet.animations.add('flyUp', [0,1,2,3]);
                 flyUp.play(10, true);
             }
+        }
+    }
+
+}
+
+function dumpHanky () {
+    console.log('function called');
+    if (game.time.now > hankyTime)
+    {
+        hanky = hankies.getFirstExists(false);
+
+        if (hanky)
+        {
+            hanky.reset(player.x, player.y + 24);
+
+                console.log('dump');
+                hanky.body.velocity.y = +300;
+                hankyTime = game.time.now + 150;
+
         }
     }
 
@@ -371,4 +415,8 @@ function killBullet (bullet) {
 
     bullet.kill();
 
+}
+
+function killHanky (hanky) {
+    hanky.kill();
 }
