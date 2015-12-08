@@ -8,7 +8,7 @@ define(
     function(Phaser, Bullets) {
 
         var Player = function(game) {
-            Phaser.Sprite.call(this, game, 32, game.world.height -150, 'guy');
+            Phaser.Sprite.call(this, game, 32, game.world.height -150, 'dude');
 
             // player physics & properties
             game.physics.arcade.enable(this);
@@ -18,7 +18,7 @@ define(
 
             // player animations
             this.animations.add('left', [0,1,2,3], 10, true);
-            this.animations.add('right', [20,21,22,23], 10, true);
+            this.animations.add('right', [5,6,7,8], 10, true);
 
             this._bullets = new Bullets(this.game, this);
 
