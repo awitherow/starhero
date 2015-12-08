@@ -38,10 +38,9 @@ define(
             this._background = this.game.add.sprite(0, 0, 'background'); // background
 
             this._player = new Player(this.game);
-            this._items = new ItemsGroup(this.game);
             this._environment = new Environment(this.game);
             this._environment.setEnvironment();
-            this._items.start();
+            this._items = new ItemsGroup(this.game);
 
              // UI TODO: UI.js? not sure...
             this.game.healthPoints = 100;
