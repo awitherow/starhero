@@ -7,7 +7,6 @@ define(
     function(Phaser, Bullet) {
 
         var Player = function(game) {
-            this.game = game;
             Phaser.Sprite.call(this, game, 32, game.world.height -150, 'dude');
 
             // player physics & properties
@@ -59,7 +58,6 @@ define(
         };
 
         Player.prototype.collectItem = function (player, item) {
-            var that = this;
 
             var itemsMap = [
                 {
@@ -87,18 +85,16 @@ define(
                 }
             ];
 
+            var bla;
+
             itemsMap.forEach(function(obj) {
-                if ( obj.key === "diamond" ){ // on collecting diamonds
-                    // game.score += 50;
-
-                } else if ( obj.key === "firstaid" ) { // on collecting firstaid
-                    // game.healthPoints += 50;
-
-                } else { // on collecting stars
-                    // game.score += 10;
+                if (obj.key == item.key) {
+                    bla = obj;
                 }
-
             });
+
+            this.game.score += bla.points;
+            this.game.healthPoints += bla.healthPoints;
 
             item.destroy(); // use destroy in case of items, otherwise piggy memory oink oink.
 

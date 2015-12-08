@@ -12,7 +12,8 @@ define(
 
             game.physics.arcade.enable(this, true);
 
-            this.body.gravity.y = (0.7 + Math.random()) * 15;
+            this.body.velocity.y = 20; //start velocity
+            this.body.gravity.y = (0.7 + Math.random()) * 20;
             this.body.bounce.y = 0.7 + Math.random() * 0.2;
 
             this.body.collideWorldBounds = true; // if off screen, collide against boundaries
