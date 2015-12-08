@@ -20,13 +20,17 @@ define(
             this.game.load.image('background', 'assets/background.png');
             this.game.load.image('ground', 'assets/platform.png');
             this.game.load.image('ledge', 'assets/ledge.png');
+
             // powerups
             this.game.load.image('star', 'assets/star.png');
             this.game.load.image('diamond', 'assets/diamond.png');
             this.game.load.image('firstaid', 'assets/firstaid.png');
+
             // characters
             this.game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
             this.game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
+            this.game.load.spritesheet('guy', 'assets/guy.png', 44, 44);
+            this.game.load.spritesheet('guy-festive', 'assets/guy-festive.png', 44, 44);
             this.game.load.spritesheet('bullet', 'assets/bullet.png', 14, 8);
         };
 
