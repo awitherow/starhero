@@ -200,8 +200,6 @@ function update() {
         dumpHanky();
     }
 
-
-
     baddies.forEach(moveEntity, this, true);
 
     // vertical movement,
