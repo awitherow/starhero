@@ -7,12 +7,13 @@ define(
     function(Phaser, Bullet) {
 
         var Player = function(game) {
+            this.game = game;
             Phaser.Sprite.call(this, game, 32, game.world.height -150, 'dude');
 
             // player physics & properties
             game.physics.arcade.enable(this);
             this.body.bounce.y = 0.1;
-            this.body.gravity.y = 1000;
+            this.body.gravity.y = 400;
             this.body.collideWorldBounds = true; // if off screen, collide against boundaries
 
             // player animations
@@ -52,10 +53,56 @@ define(
             }
 
             // jump
-            if ( this.game.input.keyboard.isDown(Phaser.Keyboard.UP) ){
+            if ( this.game.input.keyboard.isDown(Phaser.Keyboard.UP ) && this.body.touching.down ){
                 this.body.velocity.y = -350;
             }
-        }
+        };
+
+        Player.prototype.collectItem = function (player, item) {
+            var that = this;
+
+            var itemsMap = [
+                {
+                    key: 'star',
+                    points: 10,
+                    healthPoints: 0,
+                    spawn: 1,
+                    spawnType: ''
+                },
+
+                {
+                    key: 'firstaid',
+                    points: 0,
+                    healthPoints: 50,
+                    spawn: 1,
+                    spawnType: null
+                },
+
+                {
+                    key: 'diamond',
+                    points: 60,
+                    healthPoints: 0,
+                    spawn: 1,
+                    spawnType: 'baddie'
+                }
+            ];
+
+            itemsMap.forEach(function(obj) {
+                if ( obj.key === "diamond" ){ // on collecting diamonds
+                    // game.score += 50;
+
+                } else if ( obj.key === "firstaid" ) { // on collecting firstaid
+                    // game.healthPoints += 50;
+
+                } else { // on collecting stars
+                    // game.score += 10;
+                }
+
+            });
+
+            item.destroy(); // use destroy in case of items, otherwise piggy memory oink oink.
+
+        };
 
         return Player;
 

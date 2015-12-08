@@ -26,7 +26,7 @@ define(
             var envMap = [
                 {
                     x: 0,
-                    y: this.game.world.height - 64,
+                    y: this.game.world.height - 32,
                     type: 'ground'
                 },
                 {
@@ -46,9 +46,14 @@ define(
                 },
                 {
                     x: 500,
-                    y: 300,
+                    y: 325,
                     type: 'ledge'
                 },
+                {
+                    x: 250,
+                    y: 250,
+                    type: 'ledge'
+                }
             ];
 
             envMap.forEach(function(obj) {
@@ -60,7 +65,6 @@ define(
                 }
                 that.add(terrain);
             });
-
         };
 
         return Environment;

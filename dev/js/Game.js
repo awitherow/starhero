@@ -37,11 +37,35 @@ define(
                     this._environment.setEnvironment();
                     this._items.start();
 
+                    // UI TODO: UI.js? not sure...
+                    this.healthPoints = 0;
+                    this.score = 0;
+                    this.killCount = 0;
+
+                    this.healthPointsText = this.game.add.text(16,16, 'HP: 100', {
+                        fontSize: '24px',
+                        fill: '#000'
+                    });
+
+                    this.scoreText = this.game.add.text(16,42, 'Score: 0', {
+                        fontSize: '24px',
+                        fill: '#000'
+                    });
+
+                    this.killCountText = this.game.add.text(16,68, 'Kills: 0', {
+                        fontSize: '24px',
+                        fill: '#000'
+                    });
+
                 },
                 update: function () {
                     // set collisions
                     this.game.physics.arcade.collide(this._player, this._environment);
                     this.game.physics.arcade.collide(this._items, this._environment);
+
+                    // overlap actions
+                    this.game.physics.arcade.overlap(this._player, this._items, this._player.collectItem, null, this);
+
                 }
             };
         };
