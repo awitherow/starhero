@@ -60,7 +60,7 @@ define(
                 this.body.velocity.y = -350;
             }
 
-            if ( this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) ) {
+            if ( this.game.input.keyboard.isDown(Phaser.Keyboard.Q) ) {
                 this._bullets.fire();
             }
 
