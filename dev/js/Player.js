@@ -2,9 +2,10 @@
 define(
     "Player",
     [
-        "phaser"
+        "phaser",
+        "Bullets"
     ],
-    function(Phaser, Bullet) {
+    function(Phaser, Bullets) {
 
         var Player = function(game) {
             Phaser.Sprite.call(this, game, 32, game.world.height -150, 'dude');
@@ -19,7 +20,10 @@ define(
             this.animations.add('left', [0,1,2,3], 10, true);
             this.animations.add('right', [5,6,7,8], 10, true);
 
+            this._bullets = new Bullets(this.game, this);
+
             game.add.existing(this);
+
         };
 
         Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -55,6 +59,11 @@ define(
             if ( this.game.input.keyboard.isDown(Phaser.Keyboard.UP ) && this.body.touching.down ){
                 this.body.velocity.y = -350;
             }
+
+            if ( this.game.input.keyboard.isDown(Phaser.Keyboard.Q) ) {
+                this._bullets.fire();
+            }
+
         };
 
         Player.prototype.collectItem = function (player, item) {

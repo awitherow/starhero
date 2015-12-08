@@ -14,6 +14,7 @@ define(
 
             game.add.existing(this);
 
+            this.start();
         };
 
         ItemsGroup.prototype = Object.create(Phaser.Group.prototype);
@@ -21,10 +22,6 @@ define(
 
         ItemsGroup.prototype.start = function () {
             this.spawnItems(12);
-        };
-
-        ItemsGroup.prototype.update = function() {
-
         };
 
         ItemsGroup.prototype.spawnItems = function (amount, type) {
