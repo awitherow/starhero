@@ -45,6 +45,7 @@ define(
             this._environment = new Environment(this.game);
             this._environment.setEnvironment();
             this._items = new ItemsGroup(this.game);
+            this.game._items = this._items;
 
              // UI TODO: UI.js? not sure...
             this.game.healthPoints = 100;

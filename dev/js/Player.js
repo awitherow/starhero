@@ -8,7 +8,7 @@ define(
     function(Phaser, Bullets) {
 
         var Player = function(game) {
-            Phaser.Sprite.call(this, game, 32, game.world.height -150, 'dude');
+            Phaser.Sprite.call(this, game, 32, game.world.height -150, 'guy');
 
             // player physics & properties
             game.physics.arcade.enable(this);
@@ -105,9 +105,17 @@ define(
             this.game.score += bla.points;
             this.game.healthPoints += bla.healthPoints;
 
+            if ( bla.key === "diamond" ) {
+                console.log("TODO: spawn baddie");
+            } else {
+                this.game._items.spawnItems(1); // spawn item 
+            }
+
             item.destroy(); // use destroy in case of items, otherwise piggy memory oink oink.
 
         };
+
+
 
         return Player;
 
