@@ -4,9 +4,10 @@ define(
         "phaser",
         "Player",
         "Environment",
-        "ItemsGroup"
+        "ItemsGroup",
+        "BaddieGroup"
     ],
-    function(Phaser, Player, Environment, ItemsGroup) {
+    function(Phaser, Player, Environment, ItemsGroup, BaddieGroup) {
 
         var GamePlay = function (game) {
             Phaser.State.call(this, game);
@@ -45,6 +46,7 @@ define(
             this._environment = new Environment(this.game);
             this._environment.setEnvironment();
             this._items = new ItemsGroup(this.game);
+            this._baddies = new BaddieGroup(this.game);
 
              // UI TODO: UI.js? not sure...
             this.game.healthPoints = 100;
@@ -72,6 +74,7 @@ define(
             // set collisions
             this.game.physics.arcade.collide(this._player, this._environment);
             this.game.physics.arcade.collide(this._items, this._environment);
+            this.game.physics.arcade.collide(this._baddies, this._environment);
            
             // overlap actions
             this.game.physics.arcade.overlap(this._player, this._items, this.collectItem, null, this);
@@ -125,7 +128,7 @@ define(
             item.destroy(); // use destroy in case of items, otherwise piggy memory oink oink.
 
             if ( bla.key === "diamond" ) {
-                console.log("TODO: spawn baddie");
+                this._baddies.spawnBaddies(1);
             } else {
                 this._items.spawnItems(1); // spawn item 
             }

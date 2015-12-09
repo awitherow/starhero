@@ -47,7 +47,7 @@ define(
                 var b = this.getFirstExists(false);
 
                 if (b) {
-                    b.reset(this._player.x, this._player.y + 24);
+                    b.reset(this._player.x, this._player.y);
                     b.rotation = 0;
                     if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) { // move left, play left
                         b.body.velocity.x = -300;

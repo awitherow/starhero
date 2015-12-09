@@ -309,8 +309,7 @@ function moveEntity(entity) {
     if (entity.move in movements) {
         return movements[entity.move]();
     }
-
-    console.log("entity", entity);
+    
 }
 
 function collectStar(player, star) {
