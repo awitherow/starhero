@@ -45,7 +45,6 @@ define(
             this._environment = new Environment(this.game);
             this._environment.setEnvironment();
             this._items = new ItemsGroup(this.game);
-            this.game._items = this._items;
 
              // UI TODO: UI.js? not sure...
             this.game.healthPoints = 100;
@@ -75,7 +74,7 @@ define(
             this.game.physics.arcade.collide(this._items, this._environment);
            
             // overlap actions
-            this.game.physics.arcade.overlap(this._player, this._items, this._player.collectItem, null, this);
+            this.game.physics.arcade.overlap(this._player, this._items, this.collectItem, null, this);
 
             // updates scores, health points & kills
             this.scoreText.text = "Score: " + this.game.score;
@@ -83,6 +82,56 @@ define(
             this.killCountText.text = "Kills: " + this.game.killCount;
 
         };
+
+        GamePlay.prototype.collectItem = function (player, item) {
+
+            var itemsMap = [
+                {
+                    key: 'star',
+                    points: 10,
+                    healthPoints: 0,
+                    spawn: 1,
+                    spawnType: ''
+                },
+
+                {
+                    key: 'firstaid',
+                    points: 0,
+                    healthPoints: 50,
+                    spawn: 1,
+                    spawnType: null
+                },
+
+                {
+                    key: 'diamond',
+                    points: 60,
+                    healthPoints: 0,
+                    spawn: 1,
+                    spawnType: 'baddie'
+                }
+            ];
+
+            var bla;
+
+            itemsMap.forEach(function(obj) {
+                if (obj.key == item.key) {
+                    bla = obj;
+                }
+            });
+
+            this.game.score += bla.points;
+            this.game.healthPoints += bla.healthPoints;
+
+            item.destroy(); // use destroy in case of items, otherwise piggy memory oink oink.
+
+            if ( bla.key === "diamond" ) {
+                console.log("TODO: spawn baddie");
+            } else {
+                this._items.spawnItems(1); // spawn item 
+            }
+
+        };
+
 
         return GamePlay;
     }

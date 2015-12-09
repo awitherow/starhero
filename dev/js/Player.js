@@ -66,57 +66,6 @@ define(
 
         };
 
-        Player.prototype.collectItem = function (player, item) {
-
-            var itemsMap = [
-                {
-                    key: 'star',
-                    points: 10,
-                    healthPoints: 0,
-                    spawn: 1,
-                    spawnType: ''
-                },
-
-                {
-                    key: 'firstaid',
-                    points: 0,
-                    healthPoints: 50,
-                    spawn: 1,
-                    spawnType: null
-                },
-
-                {
-                    key: 'diamond',
-                    points: 60,
-                    healthPoints: 0,
-                    spawn: 1,
-                    spawnType: 'baddie'
-                }
-            ];
-
-            var bla;
-
-            itemsMap.forEach(function(obj) {
-                if (obj.key == item.key) {
-                    bla = obj;
-                }
-            });
-
-            this.game.score += bla.points;
-            this.game.healthPoints += bla.healthPoints;
-
-            if ( bla.key === "diamond" ) {
-                console.log("TODO: spawn baddie");
-            } else {
-                this.game._items.spawnItems(1); // spawn item 
-            }
-
-            item.destroy(); // use destroy in case of items, otherwise piggy memory oink oink.
-
-        };
-
-
-
         return Player;
 
     }
