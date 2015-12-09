@@ -28,12 +28,14 @@ define(
             this.game.load.image('star', 'assets/star.png');
             this.game.load.image('diamond', 'assets/diamond.png');
             this.game.load.image('firstaid', 'assets/firstaid.png');
+            this.game.load.image('pie', 'assets/pie.png');
 
             // characters
             this.game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
             this.game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
             this.game.load.spritesheet('guy-festive', 'assets/guy-festive.png', 44, 44);
             this.game.load.spritesheet('bullet', 'assets/bullet.png', 14, 8);
+            this.game.load.spritesheet('snowball', 'assets/bullet.png', 11, 11);
         };
 
         GamePlay.prototype.create = function () {
