@@ -78,6 +78,8 @@ define(
            
             // overlap actions
             this.game.physics.arcade.overlap(this._player, this._items, this.collectItem, null, this);
+            this.game.physics.arcade.overlap(this._baddies, this._player, this.damagePlayer, null, this);
+            this.game.physics.arcade.overlap(this._player._bullets, this._baddies, this.killBaddie, null, this);
 
             // updates scores, health points & kills
             this.scoreText.text = "Score: " + this.game.score;
@@ -128,13 +130,31 @@ define(
             item.destroy(); // use destroy in case of items, otherwise piggy memory oink oink.
 
             if ( bla.key === "diamond" ) {
-                this._baddies.spawnBaddies(1);
+                this._baddies.spawnBaddies(this.game.killCount || 1);
             } else {
                 this._items.spawnItems(1); // spawn item 
             }
 
         };
 
+        GamePlay.prototype.damagePlayer = function (player, baddie) {
+
+            this.game.healthPoints -= 2.5;
+
+            if ( this.game.healthPoints <= 0 ) {
+                this._player.destroy();
+            }
+
+        };
+
+        GamePlay.prototype.killBaddie = function (bullet, baddie) {
+            this.game.killCount += 1;
+
+            this._items.spawnItems(1); // spawn item 
+
+            baddie.destroy();
+            bullet.kill();
+        };
 
         return GamePlay;
     }
