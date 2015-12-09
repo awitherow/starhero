@@ -30,7 +30,6 @@ define(
             // characters
             this.game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
             this.game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
-            this.game.load.spritesheet('guy', 'assets/guy.png', 42.6666, 43);
             this.game.load.spritesheet('guy-festive', 'assets/guy-festive.png', 44, 44);
             this.game.load.spritesheet('bullet', 'assets/bullet.png', 14, 8);
         };
