@@ -20,7 +20,9 @@ define(
             // terrain
             this.game.load.image('background', 'assets/background.png');
             this.game.load.image('ground', 'assets/platform.png');
-            this.game.load.image('ledge', 'assets/ledge.png');
+            this.game.load.image('ledge', 'assets/ledge-festive.png');
+            this.game.load.image('ledge-wide', 'assets/ledge-wide-festive.png');
+            this.game.load.image('ground-festive', 'assets/ground-wide-festive.png');
 
             // powerups
             this.game.load.image('star', 'assets/star.png');
