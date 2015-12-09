@@ -33,6 +33,7 @@ define(
             this.game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
             this.game.load.spritesheet('guy-festive', 'assets/guy-festive.png', 44, 44);
             this.game.load.spritesheet('bullet', 'assets/bullet.png', 14, 8);
+            this.game.load.spritesheet('bomb', 'assets/hankies_rotate.png', 24, 24);
         };
 
         GamePlay.prototype.create = function () {
