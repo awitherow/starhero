@@ -5,9 +5,10 @@ define(
         "Player",
         "Environment",
         "ItemsGroup",
-        "BaddieGroup"
+        "BaddieGroup",
+        "Bombs"
     ],
-    function(Phaser, Player, Environment, ItemsGroup, BaddieGroup) {
+    function(Phaser, Player, Environment, ItemsGroup, BaddieGroup, Bombs) {
 
         var GamePlay = function (game) {
             Phaser.State.call(this, game);
@@ -74,11 +75,13 @@ define(
             this.game.physics.arcade.collide(this._player, this._environment);
             this.game.physics.arcade.collide(this._items, this._environment);
             this.game.physics.arcade.collide(this._baddies, this._environment);
-           
+            this.game.physics.arcade.collide(this._player._bombs, this._environment);
+
             // overlap actions
             this.game.physics.arcade.overlap(this._player, this._items, this.collectItem, null, this);
             this.game.physics.arcade.overlap(this._baddies, this._player, this.damagePlayer, null, this);
             this.game.physics.arcade.overlap(this._player._bullets, this._baddies, this.killBaddie, null, this);
+            this.game.physics.arcade.overlap(this._player._bombs, this._baddies, this.killBaddie, null, this);
 
             // updates scores, health points & kills
             this.scoreText.text = "Score: " + this.game.score;

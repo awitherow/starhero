@@ -3,9 +3,10 @@ define(
     "Player",
     [
         "phaser",
-        "Bullets"
+        "Bullets",
+        "Bombs"
     ],
-    function(Phaser, Bullets) {
+    function(Phaser, Bullets, Bombs) {
 
         var Player = function(game) {
             Phaser.Sprite.call(this, game, 32, game.world.height -150, 'guy-festive');
@@ -23,6 +24,7 @@ define(
             this.animations.add('idle', [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17], 10, true);
 
             this._bullets = new Bullets(this.game, this);
+            this._bombs = new Bombs(this.game, this);
 
             game.add.existing(this);
 
@@ -66,6 +68,10 @@ define(
 
             if ( this.game.input.keyboard.isDown(Phaser.Keyboard.Q) ) {
                 this._bullets.fire();
+            }
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.CONTROL))
+            {
+                this._bombs.fire();
             }
 
         };
