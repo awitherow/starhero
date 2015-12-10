@@ -1,0 +1,57 @@
+{
+    "1": {
+        "items": [
+            {
+                "type": "diamond",
+                "chance": 0.1
+            },
+            {
+                "type": "firstaid",
+                "chance": 0.05
+            },
+            {
+                "type": "star",
+                "chance": 0.85
+            }
+        ],
+        "baddies": [
+            {
+                "type": "baddie",
+                "trigger": "diamond",
+                "count": [ 1, 5, 10 ]
+            }
+        ],
+        "env": [
+            {
+                "x": 0,
+                "y": "{{HEIGHT}} - 32",
+                "type": "ground"
+            },
+            {
+                "x": 300,
+                "y": 450,
+                "type": "ledge"
+            },
+            {
+                "x": 0,
+                "y": 375,
+                "type": "ledge"
+            },
+            {
+                "x": 725,
+                "y": 365,
+                "type": "ledge"
+            },
+            {
+                "x": 500,
+                "y": 325,
+                "type": "ledge"
+            },
+            {
+                "x": 250,
+                "y": 250,
+                "type": "ledge"
+            }
+        ]
+    }
+}
