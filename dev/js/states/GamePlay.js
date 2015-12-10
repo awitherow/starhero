@@ -35,7 +35,7 @@ define(
             this.game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
             this.game.load.spritesheet('guy-festive', 'assets/guy-festive.png', 44, 44);
             this.game.load.spritesheet('bullet', 'assets/bullet.png', 14, 8);
-            this.game.load.spritesheet('snowball', 'assets/bullet.png', 11, 11);
+            this.game.load.spritesheet('snowball', 'assets/snowball.png', 11, 11);
         };
 
         GamePlay.prototype.create = function () {
@@ -103,7 +103,7 @@ define(
                 },
 
                 {
-                    key: 'firstaid',
+                    key: 'pie',
                     points: 0,
                     healthPoints: 50,
                     spawn: 1,
