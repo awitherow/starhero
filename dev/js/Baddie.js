@@ -9,7 +9,7 @@ define(
         var Baddie = function(game, x, y, type) {
 
             Phaser.Sprite.call(this, game, x, y, type);
-
+            this.anchor.setTo(0.5, 0.5);
             game.physics.arcade.enable(this, true);
 
             this.enableBody = true;
@@ -26,7 +26,7 @@ define(
 
         Baddie.movements = {
             "left_pounce": function(entity){ // 
-                if (entity.x > 0) {
+                if (entity.x > (0 + entity._frame.centerX) ) {
                     entity.x -= 2;
                     return entity;
 
@@ -41,7 +41,7 @@ define(
 
             },
             "right_pounce": function (entity){
-                if (entity.x < 768) {
+                if (entity.x < (768 - entity._frame.centerX)) {
                     entity.x += 2;
                     return entity;
                 }
