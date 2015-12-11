@@ -60,17 +60,17 @@ define(
 
             this.healthPointsText = this.game.add.text(16,16, 'HP: 100', {
                 fontSize: '24px',
-                fill: '#000'
+                fill: '#FFF'
             });
 
             this.scoreText = this.game.add.text(16,42, 'Score: 0', {
                 fontSize: '24px',
-                fill: '#000'
+                fill: '#FFF'
             });
 
             this.killCountText = this.game.add.text(16,68, 'Kills: 0', {
                 fontSize: '24px',
-                fill: '#000'
+                fill: '#FFF'
             });
 
         };
