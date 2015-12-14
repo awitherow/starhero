@@ -5,10 +5,9 @@ define(
         "Player",
         "Environment",
         "ItemsGroup",
-        "BaddieGroup",
-        "Bombs"
+        "BaddieGroup"
     ],
-    function(Phaser, Player, Environment, ItemsGroup, BaddieGroup, Bombs) {
+    function(Phaser, Player, Environment, ItemsGroup, BaddieGroup) {
 
         var GamePlay = function (game) {
             Phaser.State.call(this, game);
@@ -19,22 +18,26 @@ define(
 
         GamePlay.prototype.preload = function () {
             // terrain
-            this.game.load.image('background', 'assets/background.png');
-            this.game.load.image('ground', 'assets/platform.png');
-            this.game.load.image('ledge', 'assets/ledge.png');
+            this.game.load.image('background', 'assets/env/background.png');
+            this.game.load.image('ground', 'assets/env/platform.png');
+            this.game.load.image('ledge', 'assets/env/ledge-festive.png');
+            this.game.load.image('ledge-wide', 'assets/env/ledge-wide-festive.png');
+            this.game.load.image('ground-festive', 'assets/env/ground-wide-festive.png');
 
             // powerups
-            this.game.load.image('star', 'assets/star.png');
-            this.game.load.image('diamond', 'assets/diamond.png');
-            this.game.load.image('firstaid', 'assets/firstaid.png');
+            this.game.load.image('star', 'assets/items/star.png');
+            this.game.load.image('diamond', 'assets/items/diamond.png');
+            this.game.load.image('firstaid', 'assets/items/firstaid.png');
+            this.game.load.image('pie', 'assets/items/pie.png');
 
             // characters
-            this.game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
-            this.game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
-            this.game.load.spritesheet('guy-festive', 'assets/guy-festive.png', 44, 44);
-            this.game.load.spritesheet('bullet', 'assets/bullet.png', 14, 8);
-            this.game.load.spritesheet('bomb', 'assets/hankies_rotate.png', 24, 24);
-            this.game.load.spritesheet('explosion', 'assets/explode.png', 128, 128);
+            this.game.load.spritesheet('dude', 'assets/char/player/dude.png', 32, 48);
+            this.game.load.spritesheet('guy-festive', 'assets/char/player/guy-festive.png', 44, 44);
+            this.game.load.spritesheet('baddie', 'assets/char/baddies/baddie.png', 32, 32);
+
+            // weapons
+            this.game.load.spritesheet('bullet', 'assets/weapons/bullet.png', 14, 8);
+            this.game.load.spritesheet('snowball', 'assets/weapons/snowball.png', 11, 11);
         };
 
         GamePlay.prototype.create = function () {
@@ -49,7 +52,6 @@ define(
             this._environment.setEnvironment();
             this._items = new ItemsGroup(this.game);
             this._baddies = new BaddieGroup(this.game);
-            this.game._baddies = this._baddies;
 
              // UI TODO: UI.js? not sure...
             this.game.healthPoints = 100;
@@ -58,17 +60,17 @@ define(
 
             this.healthPointsText = this.game.add.text(16,16, 'HP: 100', {
                 fontSize: '24px',
-                fill: '#000'
+                fill: '#FFF'
             });
 
             this.scoreText = this.game.add.text(16,42, 'Score: 0', {
                 fontSize: '24px',
-                fill: '#000'
+                fill: '#FFF'
             });
 
             this.killCountText = this.game.add.text(16,68, 'Kills: 0', {
                 fontSize: '24px',
-                fill: '#000'
+                fill: '#FFF'
             });
 
         };
@@ -78,13 +80,11 @@ define(
             this.game.physics.arcade.collide(this._player, this._environment);
             this.game.physics.arcade.collide(this._items, this._environment);
             this.game.physics.arcade.collide(this._baddies, this._environment);
-            this.game.physics.arcade.collide(this._player._bombs, this._environment);
-
+           
             // overlap actions
             this.game.physics.arcade.overlap(this._player, this._items, this.collectItem, null, this);
             this.game.physics.arcade.overlap(this._baddies, this._player, this.damagePlayer, null, this);
             this.game.physics.arcade.overlap(this._player._bullets, this._baddies, this.killBaddie, null, this);
-            this.game.physics.arcade.overlap(this._player._bombs, this._baddies, this._player._bombs.createExplosion, null, this);
 
             // updates scores, health points & kills
             this.scoreText.text = "Score: " + this.game.score;
@@ -105,7 +105,7 @@ define(
                 },
 
                 {
-                    key: 'firstaid',
+                    key: 'pie',
                     points: 0,
                     healthPoints: 50,
                     spawn: 1,

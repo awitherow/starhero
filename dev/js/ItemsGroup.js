@@ -40,7 +40,7 @@ define(
                 if ( i == dX ) {
                     type = 'diamond';
                 } else if ( i == hX ) {
-                    type = 'firstaid';
+                    type = 'pie';
                 } else {
                     type = 'star';
                 }
