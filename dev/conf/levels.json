@@ -4,8 +4,13 @@
             "items": [
                 {
                     "type": "diamond",
-                    "chance": 0.1,
+                    "chance": 0.05,
                     "triggerWave": true
+                },
+                {
+                    "type": "cookie",
+                    "chance": 0.1,
+                    "health": 10
                 },
                 {
                     "type": "firstaid",
@@ -14,7 +19,7 @@
                 },
                 {
                     "type": "star",
-                    "chance": 0.85,
+                    "chance": 0.8,
                     "score": 10
                 }
             ],

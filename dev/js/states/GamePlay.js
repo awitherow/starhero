@@ -17,6 +17,9 @@ define(
         GamePlay.prototype.constructor = GamePlay;
 
         GamePlay.prototype.preload = function () {
+            // config
+            this.game.load.json("levels", "conf/levels.json");
+
             // terrain
             this.game.load.image('background', 'assets/env/background.png');
             this.game.load.image('ground', 'assets/env/platform.png');
@@ -43,6 +46,10 @@ define(
         };
 
         GamePlay.prototype.create = function () {
+            // config
+            this._currentLevel = 0;
+            this._levelsConfig = this.game.cache.getJSON("levels");
+
             // import physics.
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -52,7 +59,7 @@ define(
             this._player = new Player(this.game);
             this._environment = new Environment(this.game);
             this._environment.setEnvironment();
-            this._items = new ItemsGroup(this.game);
+            this._items = new ItemsGroup(this.game, this._levelsConfig.levels[this._currentLevel].items);
             this._baddies = new BaddieGroup(this.game);
             this.game._baddies = this._baddies;
 
