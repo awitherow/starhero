@@ -4,11 +4,11 @@
             "items": [
                 {
                     "type": "diamond",
-                    "chance": 0.05,
+                    "chance": 0.1,
                     "triggerWave": true
                 },
                 {
-                    "type": "cookie",
+                    "type": "pie",
                     "chance": 0.1,
                     "health": 10
                 },
@@ -19,27 +19,44 @@
                 },
                 {
                     "type": "star",
-                    "chance": 0.8,
+                    "chance": 0.75,
                     "score": 10
                 }
             ],
             "waves": [
-                [
-                    {
-                        "type": "baddieOne",
-                        "amount": 2,
-                        "attack": 10,
-                        "health": 10,
-                        "score": 50
-                    },
-                    {
-                        "type": "baddieTwo",
-                        "amount": 1,
-                        "attack": 20,
-                        "health": 20,
-                        "score": 100
-                    }
-                ]
+                {
+                    "baddies": [
+                        {
+                            "type": "baddie",
+                            "amount": 5,
+                            "attack": 10,
+                            "health": 10,
+                            "score": 50
+                        }
+                    ]
+                },
+                {
+                    "baddies": [
+                        {
+                            "type": "baddie",
+                            "amount": 10,
+                            "attack": 10,
+                            "health": 10,
+                            "score": 50
+                        }
+                    ]
+                },
+                {
+                    "baddies": [
+                        {
+                            "type": "baddie",
+                            "amount": 15,
+                            "attack": 10,
+                            "health": 10,
+                            "score": 50
+                        }
+                    ]
+                }
             ],
             "env": [
                 {

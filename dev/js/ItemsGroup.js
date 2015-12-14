@@ -32,33 +32,32 @@ define(
                 }
             });
 
-            this.start();
         };
 
         ItemsGroup.prototype = Object.create(Phaser.Group.prototype);
         ItemsGroup.prototype.constructor = ItemsGroup;
 
-        ItemsGroup.prototype.start = function () {
-            this.spawnItems(12);
+        ItemsGroup.prototype.update = function() {
+            if (this.children.length < 12) {
+                this.spawnItem();
+            }
         };
 
-        ItemsGroup.prototype.spawnItems = function (amount, type) {
+        ItemsGroup.prototype.spawnItem = function () {
 
-            for ( var i = 0; i < amount; i++ ) {
-                var locX = Math.floor(Math.random() * this.game.world.bounds.width);
-                var locY = Math.floor(Math.random() * this.game.world.bounds.height / 3);
+            var locX = Math.floor(Math.random() * this.game.world.bounds.width);
+            var locY = Math.floor(Math.random() * this.game.world.bounds.height / 3);
 
-                var randomNum = Math.random();
-                var itemType;
-                this._itemsConfig.forEach(function(type) {
-                    if (type.randomRange[0] <= randomNum && randomNum <= type.randomRange[1]) {
-                        itemType = type;
-                    }
-                });
+            var randomNum = Math.random();
+            var itemType;
+            this._itemsConfig.forEach(function(type) {
+                if (type.randomRange[0] <= randomNum && randomNum <= type.randomRange[1]) {
+                    itemType = type;
+                }
+            });
 
-                var item = new Item(this.game, locX, locY, itemType.type);
-                this.add(item);
-            }
+            var item = new Item(this.game, locX, locY, itemType);
+            this.add(item);
 
         };
 

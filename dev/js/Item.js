@@ -6,9 +6,11 @@ define(
     ],
     function(Phaser) {
 
-        var Item = function(game, x, y, type) {
+        var Item = function(game, x, y, itemType) {
 
-            Phaser.Sprite.call(this, game, x, y, type);
+            Phaser.Sprite.call(this, game, x, y, itemType.type);
+
+            this._itemType = itemType;
 
             game.physics.arcade.enable(this, true);
 
