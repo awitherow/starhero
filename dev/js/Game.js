@@ -21,6 +21,9 @@ define(
                 true, //antialias
                 Phaser.Physics.ARCADE //physics
             );
+
+            // TODO: update phaser menu system https://github.com/MattMcFarland/phaser-menu-system
+            
             this.state.add("boot", Boot);
             this.state.add("preload", Preload);
             this.state.add("gametitle", GameTitle);

@@ -7,14 +7,14 @@ define(
 
         var Preload = function (game) {
             Phaser.State.call(this, game);
+            this.game = game;
         };
 
         Preload.prototype = Object.create(Phaser.State.prototype);
         Preload.prototype.constructor = Preload;
 
         Preload.prototype.preload = function () {
-        	this.loadingBar = this.add.sprite(800,600, 'loading');
-        	this.loadingBar.anchor.setTo(0.5,0.5);
+        	this.loadingBar = this.add.sprite(this.game.world.centerX, 400, 'loading');
         	this.load.setPreloadSprite(this.loadingBar);
 
         	// game title
