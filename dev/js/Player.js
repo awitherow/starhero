@@ -69,7 +69,7 @@ define(
             if ( this.game.input.keyboard.isDown(Phaser.Keyboard.Q) ) {
                 this._bullets.fire();
             }
-            if (this.game.input.keyboard.isDown(Phaser.Keyboard.CONTROL))
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.W))
             {
                 this._bombs.fire();
             }
