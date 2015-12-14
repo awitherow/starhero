@@ -26,11 +26,11 @@ define(
             this._bulletTime = 0;
             for (var i = 0; i < 20; i++)
             {
-                var b = this.create(14, 8, 'bullet');
-                b.animations.add('flyLeft', [ 7, 6, 5, 4 ]);
+                var b = this.create(11, 11, 'snowball');
+                b.animations.add('flyLeft', [ 0, 1, 2, 3 ]);
                 b.animations.add('flyRight', [ 0, 1, 2, 3 ]);
                 b.animations.add('flyUp', [ 0, 1, 2, 3 ]);
-                b.name = 'bullet' + i;
+                b.name = 'snowball' + i;
                 b.exists = false;
                 b.visible = false;
                 this.game.physics.arcade.enable(b);

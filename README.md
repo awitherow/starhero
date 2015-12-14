@@ -13,6 +13,31 @@ You need at least these packages installed globally:
 
 The executable game is now located in www/. Just link your web server to it, or start index.html directly in your browser.
 
-## Goals
+## Features and Bugs
 
-1. enabled gps/weather based backgrounds [openweather current](http://openweathermap.org/current), [html5 geo](http://www.w3schools.com/html/html5_geolocation.asp).
+Currently we are tracking everything within GitHub issues. Features and Bugs are handled nearly the same.
+
+### Feature Requests
+
+1. Create a new issue,
+2. Label it as enhancement,
+3. Assign it a milestone,
+
+**Want to work on that feature request?**
+
+Find the issue number (# after issue).
+
+- ```git branch feature-#```
+- ```git checkout feature-#```
+
+### Report A Bug
+
+1. Create a new issue,
+2. Label it as bug
+
+**Want to work on that bug?**
+
+Find the issue number (# after issue).
+
+- ```git branch bug-#```
+- ```git checkout bug-#```

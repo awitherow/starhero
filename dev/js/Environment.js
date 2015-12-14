@@ -26,13 +26,13 @@ define(
             var envMap = [
                 {
                     x: 0,
-                    y: this.game.world.height - 32,
-                    type: 'ground'
+                    y: this.game.world.height - 50,
+                    type: 'ground-festive'
                 },
                 {
                     x: 300,
                     y: 450,
-                    type: 'ledge'
+                    type: 'ledge-wide'
                 },
                 {
                     x: 0,
@@ -41,12 +41,12 @@ define(
                 },
                 {
                     x: 725,
-                    y: 365,
+                    y: 350,
                     type: 'ledge'
                 },
                 {
                     x: 500,
-                    y: 325,
+                    y: 300,
                     type: 'ledge'
                 },
                 {
@@ -60,9 +60,6 @@ define(
                 var terrain = new Terrain(that.game, obj.x, obj.y, obj.type);
                 terrain.body.immovable = true;
                 terrain.enableBody = true;
-                if (obj.type === "ground") {
-                    terrain.scale.setTo(2,2); // scales to fit, original file is 400x32 pixels.
-                }
                 that.add(terrain);
             });
         };
