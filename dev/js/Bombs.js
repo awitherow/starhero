@@ -43,8 +43,6 @@ define(
 
                 if (bomb) {
                     bomb.reset(this._player.x, this._player.y);
-
-                    console.log('dump');
                     bomb.body.velocity.y = +300;
                     this._bombTime = this.game.time.now + 150;
 

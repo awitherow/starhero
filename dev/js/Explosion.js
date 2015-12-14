@@ -38,9 +38,7 @@ define(
             });
 
         };
-
-
-
+        
         return Explosion;
 
     }

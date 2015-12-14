@@ -38,6 +38,8 @@ define(
             // weapons
             this.game.load.spritesheet('bullet', 'assets/weapons/bullet.png', 14, 8);
             this.game.load.spritesheet('snowball', 'assets/weapons/snowball.png', 11, 11);
++           this.game.load.spritesheet('bomb', 'assets/weapons/hankies_rotate.png', 24, 24);
++           this.game.load.spritesheet('explosion', 'assets/weapons/explode.png', 128, 128);
         };
 
         GamePlay.prototype.create = function () {
@@ -52,6 +54,7 @@ define(
             this._environment.setEnvironment();
             this._items = new ItemsGroup(this.game);
             this._baddies = new BaddieGroup(this.game);
+            this.game._baddies = this._baddies;
 
              // UI TODO: UI.js? not sure...
             this.game.healthPoints = 100;
@@ -80,11 +83,13 @@ define(
             this.game.physics.arcade.collide(this._player, this._environment);
             this.game.physics.arcade.collide(this._items, this._environment);
             this.game.physics.arcade.collide(this._baddies, this._environment);
+            this.game.physics.arcade.collide(this._player._bombs, this._environment);
            
             // overlap actions
             this.game.physics.arcade.overlap(this._player, this._items, this.collectItem, null, this);
             this.game.physics.arcade.overlap(this._baddies, this._player, this.damagePlayer, null, this);
             this.game.physics.arcade.overlap(this._player._bullets, this._baddies, this.killBaddie, null, this);
+            this.game.physics.arcade.overlap(this._player._bombs, this._baddies, this._player._bombs.createExplosion, null, this);
 
             // updates scores, health points & kills
             this.scoreText.text = "Score: " + this.game.score;
