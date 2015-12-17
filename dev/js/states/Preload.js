@@ -15,10 +15,11 @@ define(
 
         Preload.prototype.preload = function () {
         	this.loadingBar = this.add.sprite(this.game.world.centerX, 400, 'loading');
+            this.loadingBar.anchor.setTo(0.5,0.5);
         	this.load.setPreloadSprite(this.loadingBar);
 
-        	// game title
-        	this.game.load.image('gametitle', "assets/states/gametitle.png");
+        	// start menu
+        	this.game.load.image('start.mainGraphic', "assets/states/gametitle.png");
         	this.game.load.image('play', "assets/states/play.png");
 
         	// terrain
@@ -48,7 +49,7 @@ define(
         };
 
         Preload.prototype.create = function () {
-        	this.game.state.start("gametitle");
+        	this.game.state.start("startmenu");
         };
 
         return Preload;
