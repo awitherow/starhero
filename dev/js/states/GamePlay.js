@@ -140,7 +140,7 @@ define(
             if (!baddie._damageTimer) {
                 baddie._damageTimer = 0;
             }
-            if (baddie._damageTimer + 500 > this.game.time.now) {
+            if (baddie._damageTimer + 200 > this.game.time.now) {
                 return;
             }
 

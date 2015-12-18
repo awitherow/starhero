@@ -1,12 +1,11 @@
 {
     "levels": [
         {
+            "waveTrigger": {
+                "type": "diamond",
+                "spawnTime": 30
+            },
             "items": [
-                {
-                    "type": "diamond",
-                    "chance": 0.1,
-                    "triggerWave": true
-                },
                 {
                     "type": "pie",
                     "chance": 0.1,
