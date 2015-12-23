@@ -1,6 +1,5 @@
-// The Baddie
 define(
-    "Baddie",
+    "baddies/Baddie",
     [
         "phaser"
     ],
@@ -16,7 +15,7 @@ define(
             this.body.gravity.y = 200;
 
             this.body.collideWorldBounds = true; // if off screen, collide against boundaries
-            
+
             game.add.existing(this);
 
         };
@@ -25,7 +24,7 @@ define(
         Baddie.prototype.constructor = Baddie;
 
         Baddie.movements = {
-            "left_pounce": function(entity){ // 
+            "left_pounce": function(entity){ //
                 if (entity.x > (0 + entity._frame.centerX) ) {
                     entity.x -= 2;
                     return entity;

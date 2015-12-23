@@ -1,9 +1,8 @@
-// The Items Group
 define(
-    "Bombs",
+    "components/Bombs",
     [
         "phaser",
-        "Explosion"
+        "components/Explosion"
     ],
     function (Phaser, Explosion) {
 

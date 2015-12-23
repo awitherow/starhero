@@ -1,6 +1,5 @@
-// The Items Group
 define(
-    "Explosion",
+    "components/Explosion",
     [
         "phaser"
     ],
@@ -38,7 +37,7 @@ define(
             });
 
         };
-        
+
         return Explosion;
 
     }

@@ -1,10 +1,9 @@
-// The Player Sprite
 define(
-    "Player",
+    "player/Player",
     [
         "phaser",
-        "Bullets",
-        "Bombs"
+        "components/Bullets",
+        "components/Bombs"
     ],
     function(Phaser, Bullets, Bombs) {
 

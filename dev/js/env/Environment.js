@@ -1,9 +1,8 @@
-// The Items Group
 define(
-    "Environment",
+    "env/Environment",
     [
         "phaser",
-        "Terrain"
+        "env/Terrain"
     ],
     function(Phaser, Terrain) {
 

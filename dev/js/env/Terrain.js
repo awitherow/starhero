@@ -1,13 +1,12 @@
-// The Items Group
 define(
-    "Terrain",
+    "env/Terrain",
     [
         "phaser"
     ],
     function(Phaser) {
 
         var Terrain = function(game, x, y, type) {
-            
+
             Phaser.Sprite.call(this, game, x, y, type);
 
             game.physics.arcade.enable(this, true);

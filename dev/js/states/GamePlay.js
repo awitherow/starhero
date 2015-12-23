@@ -2,10 +2,10 @@ define(
     "states/GamePlay",
     [
         "phaser",
-        "Player",
-        "Environment",
-        "ItemsGroup",
-        "BaddieGroup"
+        "player/Player",
+        "env/Environment",
+        "items/ItemsGroup",
+        "baddies/BaddieGroup"
     ],
     function(Phaser, Player, Environment, ItemsGroup, BaddieGroup) {
 
@@ -16,11 +16,13 @@ define(
         GamePlay.prototype = Object.create(Phaser.State.prototype);
         GamePlay.prototype.constructor = GamePlay;
 
-        GamePlay.prototype.preload = function () {
-            
-        };
-
         GamePlay.prototype.create = function () {
+            // config
+            this._currentLevel = 0;
+            this._currentWave = 0;
+            this._levelsConfig = this.game.cache.getJSON("levels");
+            this._trigger = this._levelsConfig.levels[this._currentLevel].waveTrigger;
+
             // import physics.
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -30,7 +32,7 @@ define(
             this._player = new Player(this.game);
             this._environment = new Environment(this.game);
             this._environment.setEnvironment();
-            this._items = new ItemsGroup(this.game);
+            this._items = new ItemsGroup(this.game, this._levelsConfig.levels[this._currentLevel].items);
             this._baddies = new BaddieGroup(this.game);
             this.game._baddies = this._baddies;
 
@@ -62,7 +64,7 @@ define(
             this.game.physics.arcade.collide(this._items, this._environment);
             this.game.physics.arcade.collide(this._baddies, this._environment);
             this.game.physics.arcade.collide(this._player._bombs, this._environment);
-           
+
             // overlap actions
             this.game.physics.arcade.overlap(this._player, this._items, this.collectItem, null, this);
             this.game.physics.arcade.overlap(this._baddies, this._player, this.damagePlayer, null, this);
@@ -78,68 +80,59 @@ define(
 
         GamePlay.prototype.collectItem = function (player, item) {
 
-            var itemsMap = [
-                {
-                    key: 'star',
-                    points: 10,
-                    healthPoints: 0,
-                    spawn: 1,
-                    spawnType: ''
-                },
+            var itemType = item._itemType;
 
-                {
-                    key: 'pie',
-                    points: 0,
-                    healthPoints: 50,
-                    spawn: 1,
-                    spawnType: null
-                },
+            this.game.score += itemType.score || 0;
+            this.game.healthPoints += itemType.health || 0;
 
-                {
-                    key: 'diamond',
-                    points: 60,
-                    healthPoints: 0,
-                    spawn: 1,
-                    spawnType: 'baddie'
-                }
-            ];
-
-            var bla;
-
-            itemsMap.forEach(function(obj) {
-                if (obj.key == item.key) {
-                    bla = obj;
-                }
-            });
-
-            this.game.score += bla.points;
-            this.game.healthPoints += bla.healthPoints;
-
-            item.destroy(); // use destroy in case of items, otherwise piggy memory oink oink.
-
-            if ( bla.key === "diamond" ) {
-                this._baddies.spawnBaddies(this.game.killCount || 1);
-            } else {
-                this._items.spawnItems(1); // spawn item 
+            if (itemType.type == this._trigger.type && !this._waveTriggered) {
+                this.startWave();
+                this._waveTriggered = true;
             }
+
+            item.destroy();
 
         };
 
-        GamePlay.prototype.damagePlayer = function (player, baddie) {
+        GamePlay.prototype.startWave = function() {
+            var that = this,
+                waves = this._levelsConfig.levels[this._currentLevel].waves,
+                waveLength = waves.length,
+                wave = waves[this._currentWave];
 
-            this.game.healthPoints -= 2.5;
+            if (!wave) {
+                return;
+            }
+            wave.baddies.forEach(function(baddieConf) {
+                console.log(baddieConf);
+                that._baddies.spawnBaddies(baddieConf.amount, baddieConf);
+            });
+            this._currentWave++;
+        };
+
+        GamePlay.prototype.damagePlayer = function (player, baddie) {
+            var baddieType = baddie._baddieType;
+
+            // set the timer, so that the player not always
+            if (!baddie._damageTimer) {
+                baddie._damageTimer = 0;
+            }
+            if (baddie._damageTimer + 200 > this.game.time.now) {
+                return;
+            }
+
+            this.game.healthPoints -= baddieType.attack;
 
             if ( this.game.healthPoints <= 0 ) {
                 this._player.destroy();
                 this.game.state.start("gameover", true, false, this.game.score);
             }
+            baddie._damageTimer = this.game.time.now;
 
         };
 
         GamePlay.prototype.killBaddie = function (bullet, baddie) {
             this.game.killCount += 1;
-
-            this._items.spawnItems(1); // spawn item 
 
             baddie.destroy();
             bullet.kill();

@@ -18,6 +18,9 @@ define(
             this.loadingBar.anchor.setTo(0.5,0.5);
         	this.load.setPreloadSprite(this.loadingBar);
 
+            // config
+            this.game.load.json("levels", "conf/levels.json");
+
         	// start menu
         	this.game.load.image('start.mainGraphic', "assets/states/gametitle.png");
         	this.game.load.image('play', "assets/states/play.png");

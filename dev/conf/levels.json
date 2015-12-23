@@ -1,0 +1,94 @@
+{
+    "levels": [
+        {
+            "waveTrigger": {
+                "type": "diamond",
+                "spawnTime": 30
+            },
+            "items": [
+                {
+                    "type": "diamond",
+                    "chance": 0.1,
+                    "health": 10
+                },
+                {
+                    "type": "pie",
+                    "chance": 0.05,
+                    "health": 50
+                },
+                {
+                    "type": "star",
+                    "chance": 0.75,
+                    "score": 10
+                }
+            ],
+            "waves": [
+                {
+                    "baddies": [
+                        {
+                            "type": "baddie",
+                            "amount": 5,
+                            "attack": 10,
+                            "health": 10,
+                            "score": 50
+                        }
+                    ]
+                },
+                {
+                    "baddies": [
+                        {
+                            "type": "baddie",
+                            "amount": 10,
+                            "attack": 10,
+                            "health": 10,
+                            "score": 50
+                        }
+                    ]
+                },
+                {
+                    "baddies": [
+                        {
+                            "type": "baddie",
+                            "amount": 15,
+                            "attack": 10,
+                            "health": 10,
+                            "score": 50
+                        }
+                    ]
+                }
+            ],
+            "env": [
+                {
+                    "x": 0,
+                    "y": "{{HEIGHT}} - 32",
+                    "type": "ground"
+                },
+                {
+                    "x": 300,
+                    "y": 450,
+                    "type": "ledge"
+                },
+                {
+                    "x": 0,
+                    "y": 375,
+                    "type": "ledge"
+                },
+                {
+                    "x": 725,
+                    "y": 365,
+                    "type": "ledge"
+                },
+                {
+                    "x": 500,
+                    "y": 325,
+                    "type": "ledge"
+                },
+                {
+                    "x": 250,
+                    "y": 250,
+                    "type": "ledge"
+                }
+            ]
+        }
+    ]
+}

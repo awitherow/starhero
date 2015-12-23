@@ -1,10 +1,9 @@
-// The Items Group
 define(
-    "Bullets",
+    "components/Bullets",
     [
         "phaser"
     ],
-    function(Phaser, Item) {
+    function(Phaser) {
 
         var Bullets = function(game, player) {
             Phaser.Group.call(this, game);
