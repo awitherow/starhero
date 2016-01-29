@@ -1,0 +1,12 @@
+{
+    "plugins": [
+      "babel"
+    ],
+    "extends": [
+        "xo/esnext"
+    ],
+    "globals": {
+        "document": true,
+        "window": true
+    }
+}
