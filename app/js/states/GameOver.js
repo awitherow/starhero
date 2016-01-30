@@ -17,7 +17,7 @@ export default class GameOver extends Phaser.State {
 		this.mainMenuButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY + 100, 'play', this.navToMainMenu, this);
 		this.playButton.anchor.setTo(0.5, 0.5);
 	}
-	play(){
+	play() {
 		this.game.state.start('play');
 	}
 	navToMainMenu() {

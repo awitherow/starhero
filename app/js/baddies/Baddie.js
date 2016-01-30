@@ -1,71 +1,53 @@
-define(
-    "baddies/Baddie",
-    [
-        "phaser"
-    ],
-    function(Phaser) {
+import Phaser from 'phaser';
 
-        var Baddie = function(game, x, y, type) {
+export default class Baddie extends Phaser.Sprite {
+	constructor(game, x, y, type) {
+		super(game, x, y, type);
+		this.anchor.setTo(0.5, 0.5);
+		game.physics.arcade.enable(this, true);
 
-            Phaser.Sprite.call(this, game, x, y, type);
-            this.anchor.setTo(0.5, 0.5);
-            game.physics.arcade.enable(this, true);
+		this.enableBody = true;
+		this.body.gravity.y = 200;
 
-            this.enableBody = true;
-            this.body.gravity.y = 200;
+		this.body.collideWorldBounds = true; // if off screen, collide against boundaries
 
-            this.body.collideWorldBounds = true; // if off screen, collide against boundaries
+		game.add.existing(this);
+	}
+	movements = {
+		leftPounce: entity => {
+			if (entity.x > (0 + entity._frame.centerX)) {
+				entity.x -= 2;
+				return entity;
+			}
 
-            game.add.existing(this);
+			entity.x = 0;
+			entity.move = 'rightPounce';
+			// baddie animation
+			entity.animations.stop(null, true); // stop all animation
+			const rightPounce = entity.animations.add('rightPounce', [2, 3]);
+			rightPounce.play(10, true);
+		},
+		rightPounce: entity => {
+			if (entity.x < (768 - entity._frame.centerX)) {
+				entity.x += 2;
+				return entity;
+			}
 
-        };
+			entity.x = 768;
+			entity.move = 'leftPounce';
 
-        Baddie.prototype = Object.create(Phaser.Sprite.prototype);
-        Baddie.prototype.constructor = Baddie;
-
-        Baddie.movements = {
-            "left_pounce": function(entity){ //
-                if (entity.x > (0 + entity._frame.centerX) ) {
-                    entity.x -= 2;
-                    return entity;
-
-                }
-
-                entity.x = 0;
-                entity.move = "right_pounce";
-                // baddie animation
-                entity.animations.stop(null, true); // stop all animation
-                var right_pounce = entity.animations.add('right_pounce', [2,3]);
-                right_pounce.play(10, true);
-
-            },
-            "right_pounce": function (entity){
-                if (entity.x < (768 - entity._frame.centerX)) {
-                    entity.x += 2;
-                    return entity;
-                }
-
-                entity.x = 768;
-                entity.move = "left_pounce";
-
-                // baddie animation
-                entity.animations.stop(null, true); // stop all animations
-                var left_pounce = entity.animations.add('left_pounce', [1,0]); // create left pounce
-                left_pounce.play(10, true);
-            }
-        };
-
-        Baddie.prototype.update = function() {
-            this.handleMovement();
-        };
-
-        Baddie.prototype.handleMovement = function () {
-            if (this.move in Baddie.movements) {
-                return Baddie.movements[this.move](this);
-            }
-        };
-
-        return Baddie;
-
-    }
-);
+			// baddie animation
+			entity.animations.stop(null, true); // stop all animations
+			const leftPounce = entity.animations.add('leftPounce', [1, 0]);
+			leftPounce.play(10, true);
+		}
+	};
+	update() {
+		this.handleMovement();
+	}
+	handleMovement() {
+		if (this.move in Baddie.movements) {
+			return Baddie.movements[this.move](this);
+		}
+	}
+}
