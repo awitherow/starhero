@@ -1,7 +1,7 @@
 import Game from './js/Game';
 import 'phaser-shim';
 
-export default class App {
+export class App {
 	constructor() {
 		Game.boot();
 	}

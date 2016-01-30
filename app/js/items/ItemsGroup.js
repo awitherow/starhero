@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import Item from './Item';
 
-export default class ItemsGroup extends Phaser.Group {
+export class ItemsGroup extends Phaser.Group {
 	constructor(game, itemsConfig) {
 		super(game);
 		game.physics.arcade.enable(this, true);

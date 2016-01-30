@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import Bullets from '../components/Bullets';
 import Bombs from '../components/Bombs';
 
-export default class Player extends Phaser.Sprite {
+export class Player extends Phaser.Sprite {
 	constructor(game) {
 		super(game, 32, (game.world.height - 150), 'guy-festive');
 

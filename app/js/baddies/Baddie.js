@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-export default class Baddie extends Phaser.Sprite {
+export class Baddie extends Phaser.Sprite {
 	constructor(game, x, y, type) {
 		super(game, x, y, type);
 		this.anchor.setTo(0.5, 0.5);

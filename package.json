@@ -5,7 +5,7 @@
   "main": "build/bundle.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --hot",
     "deploy": "gh-pages -d build"
   },
   "author": "",
@@ -22,8 +22,11 @@
     "eslint-plugin-babel": "^3.0.0",
     "gh-pages": "^0.8.0",
     "html-webpack-plugin": "^1.7.0",
+    "json-loader": "^0.5.4",
+    "script-loader": "^0.6.1",
     "webpack": "^1.12.11",
     "webpack-dev-server": "^1.14.1",
+    "webpack-error-notification": "^0.1.6",
     "webpack-merge": "^0.7.3"
   },
   "dependencies": {

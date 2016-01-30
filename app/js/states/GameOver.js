@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-export default class GameOver extends Phaser.State {
+export class GameOver extends Phaser.State {
 	init() {
 		console.log('You suck, but your score was still: ' + this.game.score);
 	}

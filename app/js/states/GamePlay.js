@@ -4,7 +4,7 @@ import Environment from './../env/Environment';
 import ItemsGroup from './../items/ItemsGroup';
 import BaddieGroup from './../baddies/BaddieGroup';
 
-export default class GamePlay extends Phaser.State {
+export class GamePlay extends Phaser.State {
 	create() {
 		// config
 		this._currentLevel = 0;

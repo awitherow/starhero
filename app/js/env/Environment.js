@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import Terrain from './Terrain';
 
-export default class Environment extends Phaser.Group {
+export class Environment extends Phaser.Group {
 	constructor(game) {
 		super(game);
 		game.physics.arcade.enable(this, true);

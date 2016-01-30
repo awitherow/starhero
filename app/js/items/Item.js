@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-export default class Item extends Phaser.Sprite {
+export class Item extends Phaser.Sprite {
 	constructor(game, x, y, itemType) {
 		super(game, x, y, itemType.type);
 

@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import Baddie from './Baddie';
 
-export default class BaddieGroup extends Phaser.Group {
+export class BaddieGroup extends Phaser.Group {
 	constructor(game) {
 		super(game);
 		game.physics.arcade.enable(this, true);

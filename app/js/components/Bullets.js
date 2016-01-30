@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-export default class Bullets extends Phaser.Group {
+export class Bullets extends Phaser.Group {
 	constructor(game, player) {
 		super(player);
 		this._player = player;
