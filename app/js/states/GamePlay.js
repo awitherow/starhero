@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
-import Player from './player/Player';
-import Environment from './env/Environment';
-import ItemsGroup from './items/ItemsGroup';
-import BaddieGroup from './baddies/BaddieGroup';
+import Player from '../player/Player';
+import Environment from './../env/Environment';
+import ItemsGroup from './../items/ItemsGroup';
+import BaddieGroup from './../baddies/BaddieGroup';
 
 export default class GamePlay extends Phaser.State {
 	create() {

@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-export default class Boot from Phaser.State {
+export default class Boot extends Phaser.State {
 	preload() {
 		this.game.load.image('loading', 'assets/states/loading.png');
 		this.loadingBar = this.add.sprite(this.game.world.centerX, 400, 'loading');
