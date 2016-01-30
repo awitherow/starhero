@@ -1,36 +1,20 @@
-define(
-    "items/Item",
-    [
-        "phaser"
-    ],
-    function(Phaser) {
+import Phaser from 'phaser';
 
-        var Item = function(game, x, y, itemType) {
+export default class Item extends Phaser.Sprite {
+	constructor(game, x, y, itemType) {
+		super(game, x, y, itemType.type);
 
-            Phaser.Sprite.call(this, game, x, y, itemType.type);
+		this._itemType = itemType;
 
-            this._itemType = itemType;
+		game.physics.arcade.enable(this, true);
 
-            game.physics.arcade.enable(this, true);
+		this.body.velocity.y = 20;
+		this.body.gravity.y = (0.7 + Math.random()) * 20;
+		this.body.bounce.y = 0.7 + Math.random() * 0.2;
 
-            this.body.velocity.y = 20; //start velocity
-            this.body.gravity.y = (0.7 + Math.random()) * 20;
-            this.body.bounce.y = 0.7 + Math.random() * 0.2;
+		this.body.collideWorldBounds = true;
 
-            this.body.collideWorldBounds = true; // if off screen, collide against boundaries
-
-            game.add.existing(this);
-
-        };
-
-        Item.prototype = Object.create(Phaser.Sprite.prototype);
-        Item.prototype.constructor = Item;
-
-        Item.prototype.update = function() {
-
-        };
-
-        return Item;
-
-    }
-);
+		game.add.existing(this);
+	}
+	update() {}
+}

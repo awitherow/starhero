@@ -1,24 +1,11 @@
-define(
-    "env/Terrain",
-    [
-        "phaser"
-    ],
-    function(Phaser) {
+import Phaser from 'phaser';
 
-        var Terrain = function(game, x, y, type) {
+export default class Terrain extends Phaser.Sprite {
+	constructor(game, x, y, type) {
+		super(game, x, y, type);
 
-            Phaser.Sprite.call(this, game, x, y, type);
+		game.physics.arcade.enable(this, true);
 
-            game.physics.arcade.enable(this, true);
-
-            game.add.existing(this);
-
-        };
-
-        Terrain.prototype = Object.create(Phaser.Sprite.prototype);
-        Terrain.prototype.constructor = Terrain;
-
-        return Terrain;
-
-    }
-);
+		game.add.existing(this);
+	}
+}

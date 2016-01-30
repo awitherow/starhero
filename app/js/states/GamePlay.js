@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
-import Player from 'player/Player';
-import Environment from 'env/Environment';
-import ItemsGroup from 'items/ItemsGroup';
-import BaddieGroup from 'baddies/BaddieGroup';
+import Player from './player/Player';
+import Environment from './env/Environment';
+import ItemsGroup from './items/ItemsGroup';
+import BaddieGroup from './baddies/BaddieGroup';
 
 export default class GamePlay extends Phaser.State {
 	create() {
@@ -20,7 +20,7 @@ export default class GamePlay extends Phaser.State {
 
 		this._player = new Player(this.game);
 		this._environment = new Environment(this.game);
-		this._environment.setEnvironment();
+		this._environment.setEnvironment(this._levelsConfig.levels[this._currentLevel].env);
 		this._items = new ItemsGroup(this.game, this._levelsConfig.levels[this._currentLevel].items);
 		this._baddies = new BaddieGroup(this.game);
 		this.game._baddies = this._baddies;
