@@ -1,3 +1,4 @@
+import PIXI from 'pixi.js';
 import Phaser from 'phaser';
 import Boot from './states/Boot';
 import StartMenu from './States/StartMenu';

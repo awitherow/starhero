@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Baddie from './baddies/Baddie';
+import Baddie from './Baddie';
 
 export default class BaddieGroup extends Phaser.Group {
 	constructor(game) {
@@ -23,31 +23,3 @@ export default class BaddieGroup extends Phaser.Group {
 		}
 	}
 }
-
-define(
-    'baddies/BaddieGroup',
-    [
-        'phaser',
-        'baddies/Baddie'
-    ],
-    function(Phaser, Baddie) {
-
-        let BaddieGroup = function(game) {
-            Phaser.Group.call(this, game);
-
-
-        };
-
-        BaddieGroup.prototype = Object.create(Phaser.Group.prototype);
-        BaddieGroup.prototype.constructor = BaddieGroup;
-
-        BaddieGroup.prototype.spawnBaddies = function (amount, type) {
-
-
-
-        };
-
-        return BaddieGroup;
-
-    }
-);

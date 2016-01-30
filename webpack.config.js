@@ -33,6 +33,10 @@ const common = {
 				test: /\.jsx?$/,
 				loaders: ['babel?cacheDirectory'],
 				include: PATHS.app
+			},
+			{
+				loader: 'script',
+				test: /(pixi|phaser).js/
 			}
 		]
 	}

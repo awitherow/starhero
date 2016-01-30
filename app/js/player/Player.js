@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import Bullets from './components/Bullets';
-import Bombs from './components/Bombs';
+import Bullets from '../components/Bullets';
+import Bombs from '../components/Bombs';
 
 export default class Player extends Phaser.Sprite {
 	constructor(game) {

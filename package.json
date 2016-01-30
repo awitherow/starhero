@@ -4,10 +4,12 @@
   "description": "collect stars, diamonds, heal yourself, kill baddies. how long can you survive?",
   "main": "build/bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "start": "webpack-dev-server",
+    "deploy": "gh-pages -d build"
   },
   "author": "",
-  "license": "BSD",
+  "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.4.0",
     "babel-eslint": "^4.1.6",
@@ -25,22 +27,16 @@
     "webpack-merge": "^0.7.3"
   },
   "dependencies": {
-    "phaser": "^2.4.4"
-  },
-  "scripts": {
-	  "build": "webpack",
-	  "start": "webpack-dev-server",
-	  "deploy": "gh-pages -d build"
+    "phaser": "*",
+    "phaser-shim": "^2.4.5"
   },
   "repository": {
-	  "type": "git",
-	  "url": "https://github.com/awitherow/starhero"
+    "type": "git",
+    "url": "https://github.com/awitherow/starhero"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
-	  "url": "https://github.com/awitherow/starhero/issues"
+    "url": "https://github.com/awitherow/starhero/issues"
   },
   "homepage": "https://github.com/awitherow/starhero/README.md"
 }

@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Terrain from './env/Terrain';
+import Terrain from './Terrain';
 
 export default class Environment extends Phaser.Group {
 	constructor(game) {

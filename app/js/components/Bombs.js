@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Explosion from './components/Explosion';
+import Explosion from './Explosion';
 
 export default class Bombs extends Phaser.Group {
 	constructor(game, player) {

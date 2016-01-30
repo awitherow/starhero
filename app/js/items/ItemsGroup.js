@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import Item from './items/Item';
+import Item from './Item';
 
 export default class ItemsGroup extends Phaser.Group {
 	constructor(game, itemsConfig) {
