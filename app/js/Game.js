@@ -5,16 +5,25 @@ import GamePlay from './States/GamePlay';
 import GameOver from './States/Gameover';
 
 export class Game extends Phaser.Game {
-	constructor() {
-		super(800, 600, Phaser.AUTO, '', null, false, true, Phaser.Physics.ARCADE);
+    constructor() {
+        super(
+            800,
+            600,
+            Phaser.AUTO,
+            '',
+            null,
+            false,
+            true,
+            Phaser.Physics.ARCADE,
+        );
 
-		this.state.add('boot', Boot);
-		this.state.add('startmenu', StartMenu);
-		this.state.add('play', GamePlay);
-		this.state.add('gameover', GameOver);
-	}
+        this.state.add('boot', Boot);
+        this.state.add('startmenu', StartMenu);
+        this.state.add('play', GamePlay);
+        this.state.add('gameover', GameOver);
+    }
 
-	boot() {
-		this.state.start('boot');
-	}
+    boot() {
+        this.state.start('boot');
+    }
 }
